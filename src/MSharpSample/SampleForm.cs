@@ -21,9 +21,11 @@ namespace MSharpSample
 
 		private Misskey mi { set; get; }
 
+		private string AppKey = "hmsk.eLHQBZXJmdKMqdzTbzdnIDsaifKcOIxj";
+
 		private async void StartAuthButton_Click(object sender, EventArgs e)
 		{
-			mi = new Misskey(Config.AppKey);
+			mi = new Misskey(AppKey);
 			await mi.StartAuthorize();
 			PinOKButton.Enabled = true;
 		}
