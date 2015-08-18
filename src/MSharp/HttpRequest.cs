@@ -8,7 +8,7 @@ using System.Net.Http;
 namespace MSharp
 {
 	public class HttpRequest
-    {
+	{
 		/// <summary>
 		/// リクエストメソッドの種類を表します
 		/// </summary>
@@ -91,5 +91,5 @@ namespace MSharp
 			}
 			return resStr;
 		}
-    }
+	}
 }
