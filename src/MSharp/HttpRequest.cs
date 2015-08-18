@@ -45,7 +45,7 @@ namespace MSharp
 		/// <param name="url">リクエストURL</param>
 		/// <param name="headers">リクエストのヘッダー</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
-		HttpRequest(
+		public HttpRequest(
 			MethodType method,
 			string url,
 			Dictionary<string, string> headers = null,
