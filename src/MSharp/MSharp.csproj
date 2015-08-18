@@ -54,6 +54,7 @@
     <Compile Include="HttpRequest.cs" />
     <Compile Include="Misskey.cs" />
     <Compile Include="MisskeyRequest.cs" />
+    <Compile Include="RequestException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

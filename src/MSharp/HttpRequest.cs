@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Net;
 
 namespace MSharp
 {
@@ -52,9 +53,9 @@ namespace MSharp
 			Dictionary<string, string> parameters = null)
 		{
 			this.Method = method;
-			this.Url = url;
-			this.Headers = headers;
-			this.Parameters = parameters;
+			this.Url = url ?? "";
+			this.Headers = headers ?? new Dictionary<string, string>();
+			this.Parameters = parameters ?? new Dictionary<string, string>();
 		}
 
 		/// <summary>
@@ -65,7 +66,7 @@ namespace MSharp
 			var client = new HttpClient(new HttpClientHandler { ClientCertificateOptions = ClientCertificateOption.Automatic });
 			foreach (var item in this.Headers)
 				client.DefaultRequestHeaders.Add(item.Key, item.Value);
-			if (this.Method == MethodType.GET && this.Parameters != null && this.Parameters.Count != 0)
+			if (this.Method == MethodType.GET && this.Parameters.Count != 0)
 			{
 				List<string> query = new List<string>();
 				foreach (var item in this.Parameters)
@@ -73,16 +74,70 @@ namespace MSharp
 				var JoinedQuery = string.Join("&", query);
 				this.Url += "?" + JoinedQuery;
 			}
-			string resStr;
+			string resStr = null;
+			HttpResponseMessage res = null;
+
 			if (this.Method == MethodType.GET)
 			{
-				var res = await client.GetAsync(this.Url);
-				resStr = await res.Content.ReadAsStringAsync();
+				try
+				{
+					res = await client.GetAsync(this.Url);
+				}
+				catch(InvalidOperationException)
+				{
+					throw new RequestException("URLが不正です。", ex);
+				}
+				catch (HttpRequestException ex)
+				{
+					if (ex.InnerException != null && ex.InnerException.GetType().Name == "WebException")
+						throw new RequestException("HTTPエラーが発生しました。(" + ((WebException)ex.InnerException).Message + ")", ex);
+					else
+						throw new RequestException("HTTPエラーが発生しました。", ex);
+				}
+				catch (Exception ex)
+				{
+					throw new RequestException("想定外のエラーが発生しました", ex);
+				}
+
+				try
+				{
+					resStr = await res.Content.ReadAsStringAsync();
+				}
+				catch (Exception ex)
+				{
+					throw new RequestException("レスポンスの読み出しに失敗しました。", ex);
+				}
 			}
 			else
 			{
-				var res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
-				resStr = await res.Content.ReadAsStringAsync();
+				try
+				{
+					res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
+				}
+				catch (InvalidOperationException)
+				{
+					throw new RequestException("URLもしくはパラメータが不正です。", ex);
+				}
+				catch (HttpRequestException ex)
+				{
+					if (ex.InnerException != null && ex.InnerException.GetType().Name == "WebException")
+						throw new RequestException("HTTPエラーが発生しました。(" + ((WebException)ex.InnerException).Message + ")", ex);
+					else
+						throw new RequestException("HTTPエラーが発生しました。", ex);
+				}
+				catch (Exception ex)
+				{
+					throw new RequestException("想定外のエラーが発生しました", ex);
+				}
+
+				try
+				{
+					resStr = await res.Content.ReadAsStringAsync();
+				}
+				catch (Exception ex)
+				{
+					throw new RequestException("レスポンスの読み出しに失敗しました。", ex);
+				}
 			}
 			return resStr;
 		}
