@@ -21,22 +21,22 @@ namespace MSharp
 		/// <summary>
 		/// リクエストメソッド
 		/// </summary>
-		public MethodType Method { private set; get; }
+		protected MethodType Method { protected set; get; }
 
 		/// <summary>
 		/// リクエスト先のURL
 		/// </summary>
-		public string Url { private set; get; }
+		public string Url { protected set; get; }
 
 		/// <summary>
 		/// リクエストヘッダー
 		/// </summary>
-		public Dictionary<string, string> Headers { private set; get; }
+		public Dictionary<string, string> Headers { protected set; get; }
 
 		/// <summary>
 		/// リクエストパラメータ
 		/// </summary>
-		public Dictionary<string, string> Parameters { private set; get; }
+		public Dictionary<string, string> Parameters { protected set; get; }
 
 		/// <summary>
 		/// 新しいインスタンスを生成します
@@ -60,11 +60,6 @@ namespace MSharp
 		/// <summary>
 		/// HTTPのリクエストを送信します。
 		/// </summary>
-		/// <param name="method">リクエストメソッド</param>
-		/// <param name="url">リクエストURL</param>
-		/// <param name="header">リクエストヘッダーに付加する内容</param>
-		/// <param name="body">リクエストの内容</param>
-		/// <returns>レスポンス文字列</returns>
 		public async Task<string> Request()
 		{
 			var client = new HttpClient(new HttpClientHandler { ClientCertificateOptions = ClientCertificateOption.Automatic });

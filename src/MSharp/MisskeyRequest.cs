@@ -7,37 +7,59 @@ using System.Text.RegularExpressions;
 
 namespace MSharp
 {
-	public class MisskeyRequest
+	/// <summary>
+	/// Misskey の仕様に沿ったリクエストを表します。
+	/// </summary>
+	public class MisskeyRequest : HttpRequest
 	{
+		/// <summary>
+		/// リクエストの基となる Url を取得します。
+		/// </summary>
 		public string BaseUrl { private set; get; }
 
-		private HttpRequest RequestInstance { set; get; }
-
+		/// <summary>
+		/// 新しいインスタンスを生成します
+		/// </summary>
+		/// <param name="misskey">対象となる Misskeyオブジェクト</param>
+		/// <param name="method">リクエストメソッド</param>
+		/// <param name="endPoint">リクエストのエンドポイント</param>
+		/// <param name="parameters">リクエストのパラメータ</param>
+		/// <param name="baseUrl">リクエストの基となる Url</param>
 		public MisskeyRequest(
 			Misskey misskey,
 			HttpRequest.MethodType method,
 			string endPoint,
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)
+			:base(method, null, parameters: parameters)
 		{
-			this.BaseUrl = baseUrl ?? "https://api.misskey.xyz/";
+			var match = Regex.Match(endPoint, "^/?(.+)/?$");
 
-			var match = Regex.Match(endPoint, "^/?(.+)$");
+			if (!match.Success)
+				throw new Exception("エンドポイントは相対パスの形で入力してください");
+
+			// url
+			this.BaseUrl = baseUrl ?? "https://api.misskey.xyz/";
 			endPoint = match.Groups[1].ToString();
 
+			this.Url = BaseUrl + endPoint;
+
+			// headers
 			var headers = new Dictionary<string, string> {
 				{ "sauth-app-key", misskey.AppKey }
 			};
-
 			if (misskey.UserKey != null)
 				headers.Add("sauth-user-key", misskey.UserKey);
 
-			this.RequestInstance = new HttpRequest(method, BaseUrl + endPoint, headers, parameters);
+			this.Headers = headers;
 		}
 
+		/// <summary>
+		///  Misskey の仕様に沿ってリクエストを送信します。
+		/// </summary>
 		public async Task<string> Request()
 		{
-			return await this.RequestInstance.Request();
+			return await base.Request();
 		}
 	}
 }
