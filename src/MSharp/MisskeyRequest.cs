@@ -53,13 +53,5 @@ namespace MSharp
 
 			this.Headers = headers;
 		}
-
-		/// <summary>
-		///  Misskey の仕様に沿ってリクエストを送信します。
-		/// </summary>
-		public async Task<string> Request()
-		{
-			return await base.Request();
-		}
 	}
 }

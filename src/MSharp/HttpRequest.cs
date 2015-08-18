@@ -21,7 +21,7 @@ namespace MSharp
 		/// <summary>
 		/// リクエストメソッド
 		/// </summary>
-		protected MethodType Method { protected set; get; }
+		public MethodType Method { protected set; get; }
 
 		/// <summary>
 		/// リクエスト先のURL
@@ -58,7 +58,7 @@ namespace MSharp
 		}
 
 		/// <summary>
-		/// HTTPのリクエストを送信します。
+		/// リクエストを送信します。
 		/// </summary>
 		public async Task<string> Request()
 		{
