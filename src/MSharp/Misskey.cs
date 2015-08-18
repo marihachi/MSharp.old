@@ -48,5 +48,14 @@ namespace MSharp
 
 			return new Misskey(this.AppKey, (string)json.userKey, (string)json.userId);
 		}
+
+		public async Task<string> Request(
+			HttpRequest.MethodType method,
+			string endPoint,
+			Dictionary<string, string> parameters = null,
+			string baseUrl = null)
+		{
+			return await new MisskeyRequest(this, method, endPoint, parameters, baseUrl).Request();
+		}
 	}
 }

@@ -17,7 +17,8 @@ namespace MSharp
 			Misskey misskey,
 			HttpRequest.MethodType method,
 			string endPoint,
-			Dictionary<string, string> parameters = null, string baseUrl = null)
+			Dictionary<string, string> parameters = null,
+			string baseUrl = null)
 		{
 			this.BaseUrl = baseUrl ?? "https://api.misskey.xyz/";
 
