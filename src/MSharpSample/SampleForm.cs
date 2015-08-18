@@ -25,11 +25,13 @@ namespace MSharpSample
 		{
 			mi = new Misskey(Config.AppKey);
 			await mi.StartAuthorize();
+			PinOKButton.Enabled = true;
 		}
 
 		private async void PinOKButton_Click(object sender, EventArgs e)
 		{
 			mi = await mi.AuthorizePIN(PinBox.Text);
+			StatusUpdateButton.Enabled = true;
 		}
 
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
@@ -44,6 +46,12 @@ namespace MSharpSample
 			Console.WriteLine(res);
 
 			StatusUpdateBox.Text = "";
+		}
+
+		private void SampleForm_Load(object sender, EventArgs e)
+		{
+			PinOKButton.Enabled = false;
+			StatusUpdateButton.Enabled = false;
 		}
 	}
 }
