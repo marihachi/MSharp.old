@@ -1,0 +1,8 @@
+Debug/
+Release/
+*.suo
+*.pdb
+*.mak
+*.aps
+*.opt
+packages/
