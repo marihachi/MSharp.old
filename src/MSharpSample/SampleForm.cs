@@ -36,10 +36,15 @@ namespace MSharpSample
 
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
 		{
-			var res = await new MSharp.MisskeyRequest(mi, MSharp.HttpRequest.MethodType.POST, "status/update", new Dictionary<string, string> {
-				{ "text", StatusUpdateBox.Text }
-			}).Request();
+			var res = await mi.Request(
+				MSharp.HttpRequest.MethodType.POST,
+				"status/update",
+				new Dictionary<string, string> {
+					{ "text", StatusUpdateBox.Text }
+				});
+			
 			Console.WriteLine(res);
+
 			StatusUpdateBox.Text = "";
 		}
 	}
