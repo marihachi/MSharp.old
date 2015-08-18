@@ -7,7 +7,7 @@ using System.Json;
 
 namespace MSharp
 {
-	class Misskey
+	public class Misskey
 	{
 		public string AppKey { private set; get; }
 		public string UserKey { private set; get; }
@@ -46,7 +46,7 @@ namespace MSharp
 
 			var json = JsonObject.Parse(ret).AsDynamic();
 
-			return new Misskey(this.AppKey, json.userId, json.userId);
+			return new Misskey(this.AppKey, (string)json.userKey, (string)json.userId);
 		}
 	}
 }

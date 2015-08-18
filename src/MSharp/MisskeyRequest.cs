@@ -7,11 +7,11 @@ using System.Text.RegularExpressions;
 
 namespace MSharp
 {
-	class MisskeyRequest
+	public class MisskeyRequest
 	{
 		public string BaseUrl { private set; get; }
 
-		private HttpRequest RequestInstance { private set; get; }
+		private HttpRequest RequestInstance { set; get; }
 
 		public MisskeyRequest(
 			Misskey misskey,
@@ -27,6 +27,9 @@ namespace MSharp
 			var headers = new Dictionary<string, string> {
 				{ "sauth-app-key", misskey.AppKey }
 			};
+
+			if (misskey.UserKey != null)
+				headers.Add("sauth-user-key", misskey.UserKey);
 
 			this.RequestInstance = new HttpRequest(method, BaseUrl + endPoint, headers, parameters);
 		}
