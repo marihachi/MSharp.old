@@ -32,8 +32,8 @@
 			this.PinOKButton = new System.Windows.Forms.Button();
 			this.PinBox = new System.Windows.Forms.TextBox();
 			this.PinLabel = new System.Windows.Forms.Label();
-			this.APITestButton1 = new System.Windows.Forms.Button();
-			this.ParameterBox1 = new System.Windows.Forms.TextBox();
+			this.StatusUpdateButton = new System.Windows.Forms.Button();
+			this.StatusUpdateBox = new System.Windows.Forms.TextBox();
 			this.PostLabel = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
@@ -49,6 +49,7 @@
 			this.StartAuthButton.TabIndex = 0;
 			this.StartAuthButton.Text = "認証開始";
 			this.StartAuthButton.UseVisualStyleBackColor = false;
+			this.StartAuthButton.Click += new System.EventHandler(this.StartAuthButton_Click);
 			// 
 			// PinOKButton
 			// 
@@ -62,6 +63,7 @@
 			this.PinOKButton.TabIndex = 1;
 			this.PinOKButton.Text = "OK";
 			this.PinOKButton.UseVisualStyleBackColor = false;
+			this.PinOKButton.Click += new System.EventHandler(this.PinOKButton_Click);
 			// 
 			// PinBox
 			// 
@@ -84,28 +86,29 @@
 			this.PinLabel.TabIndex = 4;
 			this.PinLabel.Text = "PINコード:";
 			// 
-			// APITestButton1
+			// StatusUpdateButton
 			// 
-			this.APITestButton1.BackColor = System.Drawing.Color.Transparent;
-			this.APITestButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.APITestButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-			this.APITestButton1.Location = new System.Drawing.Point(130, 194);
-			this.APITestButton1.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
-			this.APITestButton1.Name = "APITestButton1";
-			this.APITestButton1.Size = new System.Drawing.Size(70, 28);
-			this.APITestButton1.TabIndex = 5;
-			this.APITestButton1.Text = "Update";
-			this.APITestButton1.UseVisualStyleBackColor = false;
+			this.StatusUpdateButton.BackColor = System.Drawing.Color.Transparent;
+			this.StatusUpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.StatusUpdateButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+			this.StatusUpdateButton.Location = new System.Drawing.Point(130, 194);
+			this.StatusUpdateButton.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
+			this.StatusUpdateButton.Name = "StatusUpdateButton";
+			this.StatusUpdateButton.Size = new System.Drawing.Size(70, 28);
+			this.StatusUpdateButton.TabIndex = 5;
+			this.StatusUpdateButton.Text = "Update";
+			this.StatusUpdateButton.UseVisualStyleBackColor = false;
+			this.StatusUpdateButton.Click += new System.EventHandler(this.StatusUpdateButton_Click);
 			// 
-			// ParameterBox1
+			// StatusUpdateBox
 			// 
-			this.ParameterBox1.BackColor = System.Drawing.Color.White;
-			this.ParameterBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.ParameterBox1.Location = new System.Drawing.Point(14, 161);
-			this.ParameterBox1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-			this.ParameterBox1.Name = "ParameterBox1";
-			this.ParameterBox1.Size = new System.Drawing.Size(186, 25);
-			this.ParameterBox1.TabIndex = 10;
+			this.StatusUpdateBox.BackColor = System.Drawing.Color.White;
+			this.StatusUpdateBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.StatusUpdateBox.Location = new System.Drawing.Point(14, 161);
+			this.StatusUpdateBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+			this.StatusUpdateBox.Name = "StatusUpdateBox";
+			this.StatusUpdateBox.Size = new System.Drawing.Size(186, 25);
+			this.StatusUpdateBox.TabIndex = 10;
 			// 
 			// PostLabel
 			// 
@@ -125,8 +128,8 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.ClientSize = new System.Drawing.Size(214, 236);
 			this.Controls.Add(this.PostLabel);
-			this.Controls.Add(this.ParameterBox1);
-			this.Controls.Add(this.APITestButton1);
+			this.Controls.Add(this.StatusUpdateBox);
+			this.Controls.Add(this.StatusUpdateButton);
 			this.Controls.Add(this.PinLabel);
 			this.Controls.Add(this.PinBox);
 			this.Controls.Add(this.PinOKButton);
@@ -148,8 +151,8 @@
 		private System.Windows.Forms.Button PinOKButton;
 		private System.Windows.Forms.TextBox PinBox;
 		private System.Windows.Forms.Label PinLabel;
-		private System.Windows.Forms.Button APITestButton1;
-		private System.Windows.Forms.TextBox ParameterBox1;
+		private System.Windows.Forms.Button StatusUpdateButton;
+		private System.Windows.Forms.TextBox StatusUpdateBox;
 		private System.Windows.Forms.Label PostLabel;
 	}
 }

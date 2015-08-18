@@ -6,3 +6,5 @@ Release/
 *.aps
 *.opt
 packages/
+
+Config.cs
