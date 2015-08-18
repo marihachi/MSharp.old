@@ -52,7 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HttpRequest.cs" />
-    <Compile Include="DynamicJson.cs" />
+    <Compile Include="Misskey.cs" />
+    <Compile Include="MisskeyRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
