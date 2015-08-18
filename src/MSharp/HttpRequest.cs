@@ -83,7 +83,7 @@ namespace MSharp
 				{
 					res = await client.GetAsync(this.Url);
 				}
-				catch(InvalidOperationException)
+				catch(InvalidOperationException ex)
 				{
 					throw new RequestException("URLが不正です。", ex);
 				}
@@ -114,7 +114,7 @@ namespace MSharp
 				{
 					res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
 				}
-				catch (InvalidOperationException)
+				catch (InvalidOperationException ex)
 				{
 					throw new RequestException("URLもしくはパラメータが不正です。", ex);
 				}
