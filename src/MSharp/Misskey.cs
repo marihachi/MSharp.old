@@ -19,7 +19,10 @@ namespace MSharp
 			this.AppKey = appKey;
 		}
 
-		public Misskey(string appKey, string userKey, string userId)
+		public Misskey(
+			string appKey,
+			string userKey,
+			string userId)
 		{
 			this.AppKey = appKey;
 			this.UserKey = userKey;
