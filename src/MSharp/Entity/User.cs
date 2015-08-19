@@ -21,7 +21,7 @@ namespace MSharp.Entity
 		public User(string jsonString)
 		{
 			var j = Json.Parse(jsonString);
-			Console.WriteLine(j.bannerImageUrl.Value);
+
 			this.BannerImageUrl = new Uri(j.bannerImageUrl.Value);
 			this.Bio = j.bio.Value;
 			this.Color = ColorTranslator.FromHtml(j.color.Value);

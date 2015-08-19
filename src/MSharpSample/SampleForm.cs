@@ -30,7 +30,6 @@ namespace MSharpSample
 			{
 				MessageBox.Show(ex.Message);
 			}
-			
 		}
 
 		private async void PinOKButton_Click(object sender, EventArgs e)
