@@ -95,7 +95,7 @@
 			this.StatusUpdateButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
 			this.StatusUpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.StatusUpdateButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.StatusUpdateButton.Location = new System.Drawing.Point(130, 194);
+			this.StatusUpdateButton.Location = new System.Drawing.Point(130, 214);
 			this.StatusUpdateButton.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
 			this.StatusUpdateButton.Name = "StatusUpdateButton";
 			this.StatusUpdateButton.Size = new System.Drawing.Size(70, 28);
@@ -111,8 +111,9 @@
 			this.StatusUpdateBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.StatusUpdateBox.Location = new System.Drawing.Point(14, 161);
 			this.StatusUpdateBox.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+			this.StatusUpdateBox.Multiline = true;
 			this.StatusUpdateBox.Name = "StatusUpdateBox";
-			this.StatusUpdateBox.Size = new System.Drawing.Size(186, 25);
+			this.StatusUpdateBox.Size = new System.Drawing.Size(186, 45);
 			this.StatusUpdateBox.TabIndex = 10;
 			// 
 			// PostLabel
@@ -131,7 +132,7 @@
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(214, 236);
+			this.ClientSize = new System.Drawing.Size(214, 256);
 			this.Controls.Add(this.PostLabel);
 			this.Controls.Add(this.StatusUpdateBox);
 			this.Controls.Add(this.StatusUpdateButton);

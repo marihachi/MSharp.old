@@ -32,8 +32,15 @@ namespace MSharpSample
 
 		private async void PinOKButton_Click(object sender, EventArgs e)
 		{
-			mi = await mi.AuthorizePIN(PinBox.Text);
-			StatusUpdateButton.Enabled = true;
+			try
+			{
+				mi = await mi.AuthorizePIN(PinBox.Text);
+				StatusUpdateButton.Enabled = true;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
