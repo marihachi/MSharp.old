@@ -44,11 +44,8 @@ namespace MSharp
 
 			var json = Json.Parse(res);
 			if (json != null)
-			{
 				this.AuthenticationSessionKey = json.AuthenticationSessionKey;
-			}
-
-			if (this.AuthenticationSessionKey == null)
+			else
 				throw new RequestException("AuthenticationSessionKey の取得に失敗しました。");
 
 			try
