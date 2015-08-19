@@ -67,6 +67,8 @@ namespace MSharp
 				}).Request();
 
 			var json = Json.Parse(ret);
+			if(json == null)
+				throw new RequestException("UserKey 取得に失敗しました。");
 
 			return new Misskey(this.AppKey, (string)json.userKey, (string)json.userId);
 		}
