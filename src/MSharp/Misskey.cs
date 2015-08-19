@@ -83,7 +83,7 @@ namespace MSharp
 
 			var json = Json.Parse(res);
 			if (json != null)
-				this.AuthenticationSessionKey = json.AuthenticationSessionKey;
+				this.AuthenticationSessionKey = json.authenticationSessionKey;
 			else
 				throw new MSharpException("AuthenticationSessionKey の取得に失敗しました。");
 
