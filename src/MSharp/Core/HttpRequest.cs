@@ -48,6 +48,9 @@ namespace MSharp.Core
 			if (url == null || string.IsNullOrEmpty(url) || string.IsNullOrWhiteSpace(url))
 				throw new ArgumentException("url を空にすることは出来ません。");
 
+			if (method != MethodType.GET && method != MethodType.POST)
+				throw new ArgumentException("method が無効です。");
+
 			this.Method = method;
 			this.Url = url;
 			this.Headers = headers ?? new Dictionary<string, string>();

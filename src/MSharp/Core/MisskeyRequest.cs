@@ -34,6 +34,9 @@ namespace MSharp.Core
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)
 		{
+			if (method != MethodType.GET && method != MethodType.POST)
+				throw new ArgumentException("method が無効です。");
+
 			if (string.IsNullOrEmpty(endPoint) || string.IsNullOrWhiteSpace(endPoint))
 				throw new ArgumentException("endPoint を空にすることは出来ません。");
 
