@@ -47,9 +47,8 @@ namespace MSharp
 			this.Url = BaseUrl + endPoint;
 
 			// headers
-			var headers = new Dictionary<string, string> {
-				{ "sauth-app-key", misskey.AppKey }
-			};
+			var headers = new Dictionary<string, string>();
+			headers.Add("sauth-app-key", misskey.AppKey);
 			if (misskey.UserKey != null)
 				headers.Add("sauth-user-key", misskey.UserKey);
 
