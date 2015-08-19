@@ -3,10 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Json;
+
+using MSharp.Core;
+using MSharp.Core.Utility;
 
 namespace MSharp
 {
+	/// <summary>
+	/// リクエストメソッドの種類を表します
+	/// </summary>
+	public enum MethodType
+	{
+		GET,
+		POST
+	}
+
 	public class Misskey
 	{
 		public string AppKey { private set; get; }
@@ -31,29 +42,42 @@ namespace MSharp
 
 		public async Task StartAuthorize()
 		{
-			var ret = await new MisskeyRequest(this, HttpRequest.MethodType.GET, "sauth/get-authentication-session-key").Request();
+			var res = await new MisskeyRequest(this, MethodType.GET, "https://api.misskey.xyz/sauth/get-authentication-session-key").Request();
 
-			var json = JsonObject.Parse(ret).AsDynamic();
-			this.AuthenticationSessionKey = json.authenticationSessionKey;
+			var json = Json.Parse(res);
+			if (json != null)
+			{
+				this.AuthenticationSessionKey = json.AuthenticationSessionKey;
+			}
 
-			System.Diagnostics.Process.Start("https://api.misskey.xyz/authorize@" + this.AuthenticationSessionKey);
+			if (this.AuthenticationSessionKey == null)
+				throw new RequestException("AuthenticationSessionKey の取得に失敗しました。");
+
+			try
+			{
+				System.Diagnostics.Process.Start("https://api.misskey.xyz/authorize@" + this.AuthenticationSessionKey);
+			}
+			catch(Exception ex)
+			{
+				throw new RequestException("アプリ連携ページの表示に失敗しました。", ex);
+			}
 		}
 
 		public async Task<Misskey> AuthorizePIN(string pinCode)
 		{
-			var ret = await new MisskeyRequest(this, HttpRequest.MethodType.GET, "sauth/get-user-key",
+			var ret = await new MisskeyRequest(this, MethodType.GET, "sauth/get-user-key",
 				new Dictionary<string, string> {
 					{ "authentication-session-key", AuthenticationSessionKey },
 					{ "pin-code", pinCode}
 				}).Request();
 
-			var json = JsonObject.Parse(ret).AsDynamic();
+			var json = Json.Parse(ret);
 
 			return new Misskey(this.AppKey, (string)json.userKey, (string)json.userId);
 		}
 
 		public async Task<string> Request(
-			HttpRequest.MethodType method,
+			MethodType method,
 			string endPoint,
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)

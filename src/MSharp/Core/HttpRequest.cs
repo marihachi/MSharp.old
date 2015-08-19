@@ -6,19 +6,10 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net;
 
-namespace MSharp
+namespace MSharp.Core
 {
 	public class HttpRequest
 	{
-		/// <summary>
-		/// リクエストメソッドの種類を表します
-		/// </summary>
-		public enum MethodType
-		{
-			GET,
-			POST
-		}
-
 		/// <summary>
 		/// リクエストメソッド
 		/// </summary>
@@ -46,6 +37,7 @@ namespace MSharp
 		/// <param name="url">リクエストURL</param>
 		/// <param name="headers">リクエストのヘッダー</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
+		/// <exception cref="ArgumentException"></exception>
 		public HttpRequest(
 			MethodType method,
 			string url,
@@ -66,7 +58,8 @@ namespace MSharp
 		/// <summary>
 		/// リクエストを送信します。
 		/// </summary>
-		public async Task<string> Request()
+		/// <exception cref="RequestException"></exception>
+		public virtual async Task<string> Request()
 		{
 			var client = new HttpClient(new HttpClientHandler { ClientCertificateOptions = ClientCertificateOption.Automatic });
 			foreach (var item in this.Headers)

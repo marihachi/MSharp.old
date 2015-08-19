@@ -46,7 +46,7 @@ namespace MSharpSample
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
 		{
 			var res = await mi.Request(
-				HttpRequest.MethodType.POST,
+				MethodType.POST,
 				"status/update",
 				new Dictionary<string, string> {
 					{ "text", StatusUpdateBox.Text }

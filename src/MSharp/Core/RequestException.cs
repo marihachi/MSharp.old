@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSharp
+namespace MSharp.Core
 {
 	/// <summary>
 	/// リクエストで発生するエラーを表します。

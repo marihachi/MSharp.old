@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace MSharp
+using MSharp.Core.Utility;
+
+namespace MSharp.Core
 {
 	/// <summary>
 	/// Misskey の仕様に沿ったリクエストを表します。
@@ -25,9 +27,11 @@ namespace MSharp
 		/// <param name="endPoint">リクエストのエンドポイント</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
 		/// <param name="baseUrl">リクエストの基となる Url</param>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public MisskeyRequest(
 			Misskey misskey,
-			HttpRequest.MethodType method,
+			MethodType method,
 			string endPoint,
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)
@@ -35,7 +39,10 @@ namespace MSharp
 			var match = Regex.Match(endPoint, "^/?(.+)/?$");
 
 			if (!match.Success)
-				throw new Exception("エンドポイントは相対パスの形式で入力してください");
+				throw new ArgumentException("エンドポイントは相対パスの形式で入力してください");
+
+			if (misskey == null || misskey.AppKey == null)
+				throw new ArgumentNullException("misskey.AppKey");
 
 			this.Method = method;
 			this.Parameters = parameters ?? new Dictionary<string, string>();
@@ -53,6 +60,25 @@ namespace MSharp
 				headers.Add("sauth-user-key", misskey.UserKey);
 
 			this.Headers = headers;
+		}
+
+		/// <summary>
+		/// 現在のMisskeyオブジェクトを使用してリクエストを送信します。
+		/// </summary>
+		/// <exception cref="RequestException"></exception>
+		public override async Task<string> Request()
+		{
+			var res = await base.Request();
+
+			var json = Json.Parse(res);
+			if (json.error != null)
+			{
+				var ex = new RequestException("Misskeyからエラーが返されました。");
+				ex.Data.Add("Error", json.error.ToString());
+				throw ex;
+			}
+
+			return res;
 		}
 	}
 }
