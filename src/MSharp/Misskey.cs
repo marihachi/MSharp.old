@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using MSharp.Core;
@@ -57,7 +55,7 @@ namespace MSharp
 			{
 				System.Diagnostics.Process.Start("https://api.misskey.xyz/authorize@" + this.AuthenticationSessionKey);
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				throw new RequestException("アプリ連携ページの表示に失敗しました。", ex);
 			}
