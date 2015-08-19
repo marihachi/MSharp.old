@@ -82,68 +82,38 @@ namespace MSharp
 			string resStr = null;
 			HttpResponseMessage res = null;
 
-			if (this.Method == MethodType.GET)
+			try
 			{
-				try
-				{
+				if (this.Method == MethodType.GET)
 					res = await client.GetAsync(this.Url);
-				}
-				catch(InvalidOperationException ex)
-				{
-					throw new RequestException("URLが不正です。", ex);
-				}
-				catch (HttpRequestException ex)
-				{
-					if (ex.InnerException != null && ex.InnerException.GetType().Name == "WebException")
-						throw new RequestException("HTTPエラーが発生しました。(" + ((WebException)ex.InnerException).Message + ")", ex);
-					else
-						throw new RequestException("HTTPエラーが発生しました。", ex);
-				}
-				catch (Exception ex)
-				{
-					throw new RequestException("想定外のエラーが発生しました", ex);
-				}
-
-				try
-				{
-					resStr = await res.Content.ReadAsStringAsync();
-				}
-				catch (Exception ex)
-				{
-					throw new RequestException("レスポンスの読み出しに失敗しました。", ex);
-				}
-			}
-			else
-			{
-				try
-				{
+				else
 					res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
-				}
-				catch (InvalidOperationException ex)
-				{
-					throw new RequestException("URLもしくはパラメータが不正です。", ex);
-				}
-				catch (HttpRequestException ex)
-				{
-					if (ex.InnerException != null && ex.InnerException.GetType().Name == "WebException")
-						throw new RequestException("HTTPエラーが発生しました。(" + ((WebException)ex.InnerException).Message + ")", ex);
-					else
-						throw new RequestException("HTTPエラーが発生しました。", ex);
-				}
-				catch (Exception ex)
-				{
-					throw new RequestException("想定外のエラーが発生しました", ex);
-				}
-
-				try
-				{
-					resStr = await res.Content.ReadAsStringAsync();
-				}
-				catch (Exception ex)
-				{
-					throw new RequestException("レスポンスの読み出しに失敗しました。", ex);
-				}
 			}
+			catch (InvalidOperationException ex)
+			{
+				throw new RequestException("URLが不正です。", ex);
+			}
+			catch (HttpRequestException ex)
+			{
+				if (ex.InnerException != null && ex.InnerException.GetType().Name == "WebException")
+					throw new RequestException("HTTPエラーが発生しました。(" + ((WebException)ex.InnerException).Message + ")", ex);
+				else
+					throw new RequestException("HTTPエラーが発生しました。", ex);
+			}
+			catch (Exception ex)
+			{
+				throw new RequestException("想定外のエラーが発生しました", ex);
+			}
+
+			try
+			{
+				resStr = await res.Content.ReadAsStringAsync();
+			}
+			catch (Exception ex)
+			{
+				throw new RequestException("レスポンスの読み出しに失敗しました。", ex);
+			}
+
 			return resStr;
 		}
 	}
