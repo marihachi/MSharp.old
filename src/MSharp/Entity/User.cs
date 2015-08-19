@@ -21,34 +21,34 @@ namespace MSharp.Entity
 		public User(string jsonString)
 		{
 			var j = Json.Parse(jsonString);
-
-			this.BannerImageUrl = new Uri(j.bannerImageUrl.ToString());
-			this.Bio = j.bio.ToString();
-			this.Color = ColorTranslator.FromHtml(j.color.ToString());
-			this.Comment = j.comment.ToString();
+			Console.WriteLine(j.bannerImageUrl.Value);
+			this.BannerImageUrl = new Uri(j.bannerImageUrl.Value);
+			this.Bio = j.bio.Value;
+			this.Color = ColorTranslator.FromHtml(j.color.Value);
+			this.Comment = j.comment.Value;
 			this.CreatedAt = null; //TODO
-			this.FollowersCount = int.Parse(j.followersCount.ToString());
-			this.FollowingsCount = int.Parse(j.followingsCount.ToString());
-			this.IconImageUrl = j.iconImageUrl.ToString();
-			this.Id = j.id.ToString();
-			this.IsDisplayNotFollowUserMention = bool.Parse(j.isDisplayNotFollowUserMention.ToString());
-			this.IsPlus = bool.Parse(j.isPlus.ToString());
-			this.IsSuspended = bool.Parse(j.isSuspended.ToString());
-			this.IsVerified = bool.Parse(j.isVerified.ToString());
-			this.Lang = j.lang.ToString();
+			this.FollowersCount = j.followersCount.Value;
+			this.FollowingsCount = j.followingsCount.Value;
+			this.IconImageUrl = new Uri(j.iconImageUrl.Value);
+			this.Id = j.id.Value;
+			this.IsDisplayNotFollowUserMention = j.isDisplayNotFollowUserMention.Value;
+			this.IsPlus = j.isPlus.Value;
+			this.IsSuspended = j.isSuspended.Value;
+			this.IsVerified = j.isVerified.Value;
+			this.Lang = j.lang.Value;
 			this.Links = new List<Uri>();
 			foreach (var link in j.links)
-				this.Links.Add(new Uri(link.ToString()));
-			this.Location = j.location.ToString();
-			this.Name = j.name.ToString();
-			this.ScreenName = j.screenName.ToString();
-			this.StatusesCount = int.Parse(j.statusesCount.ToString());
-			this.StatusFavoritesCount = int.Parse(j.statusFavoritesCount.ToString());
+				this.Links.Add(new Uri(link.Value));
+			this.Location = j.location.Value;
+			this.Name = j.name.Value;
+			this.ScreenName = j.screenName.Value;
+			this.StatusesCount = j.statusesCount.Value;
+			this.StatusFavoritesCount = j.statusFavoritesCount.Value;
 			this.Tags = new List<string>();
 			foreach (var tag in j.tags)
-				this.Tags.Add(tag.ToString());
-			this.Url = new Uri(j.url.ToString());
-			this.WallpaperImageUrl = new Uri(j.wallpaperImageUrl.ToString());
+				this.Tags.Add(tag.Value);
+			this.Url = new Uri(j.url.Value);
+			this.WallpaperImageUrl = new Uri(j.wallpaperImageUrl.Value);
 		}
 
 		/// <summary>

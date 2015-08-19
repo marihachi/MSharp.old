@@ -21,8 +21,16 @@ namespace MSharpSample
 		private async void StartAuthButton_Click(object sender, EventArgs e)
 		{
 			mi = new Misskey(AppKey);
-			await mi.StartAuthorize();
-			PinOKButton.Enabled = true;
+			try
+			{
+				await mi.StartAuthorize();
+				PinOKButton.Enabled = true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			
 		}
 
 		private async void PinOKButton_Click(object sender, EventArgs e)

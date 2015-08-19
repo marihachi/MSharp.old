@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using MSharp.Core;
+using MSharp.Entity;
 using MSharp.Core.Utility;
 
 namespace MSharp
@@ -28,19 +29,19 @@ namespace MSharp
 	public class Misskey
 	{
 		/// <summary>
-		/// アプリ連携のキー
+		/// アプリ連携のキーを取得します。
 		/// </summary>
 		public string AppKey { private set; get; }
 
 		/// <summary>
-		/// アプリの利用に必要なユーザー毎のキー
+		/// アプリの利用に必要なユーザー毎のキーを取得します。
 		/// </summary>
 		public string UserKey { private set; get; }
 
 		/// <summary>
-		/// ユーザーID
+		/// ユーザーオブジェクトを取得または設定します。
 		/// </summary>
-		public string UserId { private set; get; }
+		public User User { set; get; }
 
 		private string AuthenticationSessionKey { set; get; }
 
@@ -61,24 +62,22 @@ namespace MSharp
 		/// </summary>
 		/// <param name="appKey">アプリ連携のキー</param>
 		/// <param name="userKey">アプリの利用に必要なユーザー毎のキー</param>
-		/// <param name="userId">ユーザーID</param>
+		/// <param name="user">ユーザーオブジェクト</param>
 		public Misskey(
 			string appKey,
 			string userKey,
-			string userId,
-			string userScreenName,
-			string userName)
+			User user)
 		{
 			if (appKey == null)
 				throw new ArgumentNullException("appKey");
 			if (userKey == null)
 				throw new ArgumentNullException("userKey");
-			if (userId == null)
-				throw new ArgumentNullException("userId");
+			if (user == null)
+				throw new ArgumentNullException("user");
 
 			this.AppKey = appKey;
 			this.UserKey = userKey;
-			this.UserId = userId;
+			this.User = user;
 		}
 
 		/// <summary>
@@ -138,9 +137,7 @@ namespace MSharp
 			if(json == null)
 				throw new MSharpException("PINコードの検証に失敗しました。");
 
-			var user = json.user.ToString();
-			Console.WriteLine(user);
-			return new Misskey(this.AppKey, (string)user.userKey, (string)json.userId,"","");
+			return new Misskey(this.AppKey, json.userKey.Value, new User(json.user.ToString()));
 		}
 
 		/// <summary>
