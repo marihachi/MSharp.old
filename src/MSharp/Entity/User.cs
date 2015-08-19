@@ -22,14 +22,14 @@ namespace MSharp.Entity
 		{
 			var j = Json.Parse(jsonString);
 
-			this.BannerImageUrl = j.bannerImageUrl.Value != null ? new Uri(j.bannerImageUrl.Value) : null;
+			this.BannerImageUrl = !string.IsNullOrEmpty(j.bannerImageUrl.Value) ? new Uri(j.bannerImageUrl.Value) : null;
 			this.Bio = j.bio.Value;
 			this.Color = ColorTranslator.FromHtml(j.color.Value);
 			this.Comment = j.comment.Value;
 			this.CreatedAt = null; //TODO
 			this.FollowersCount = j.followersCount.Value;
 			this.FollowingsCount = j.followingsCount.Value;
-			this.IconImageUrl = j.iconImageUrl.Value != null ? new Uri(j.iconImageUrl.Value) : null;
+			this.IconImageUrl = !string.IsNullOrEmpty(j.iconImageUrl.Value) ? new Uri(j.iconImageUrl.Value) : null;
 			this.Id = j.id.Value;
 			this.IsDisplayNotFollowUserMention = j.isDisplayNotFollowUserMention.Value;
 			this.IsPlus = j.isPlus.Value;
@@ -47,8 +47,8 @@ namespace MSharp.Entity
 			this.Tags = new List<string>();
 			foreach (var tag in j.tags)
 				this.Tags.Add(tag.Value);
-			this.Url = j.url.Value != null ? new Uri(j.url.Value) : null;
-			this.WallpaperImageUrl = j.wallpaperImageUrl.Value != null ? new Uri(j.wallpaperImageUrl.Value) : null;
+			this.Url = !string.IsNullOrEmpty(j.url.Value) ? new Uri(j.url.Value) : null;
+			this.WallpaperImageUrl = !string.IsNullOrEmpty(j.wallpaperImageUrl.Value) ? new Uri(j.wallpaperImageUrl.Value) : null;
 		}
 
 		/// <summary>
