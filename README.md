@@ -5,7 +5,7 @@
 3. Done
 
 # Usage
-Please read sample.
+Please read [sample](src/MSharpSample).
 # Contribution
 We welcome your contribution.
 # License
