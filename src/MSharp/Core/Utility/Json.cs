@@ -2,6 +2,9 @@
 
 namespace MSharp.Core.Utility
 {
+	/// <summary>
+	/// JSON形式のデータを扱うクラスです。
+	/// </summary>
 	public static class Json
 	{
 		/// <summary>

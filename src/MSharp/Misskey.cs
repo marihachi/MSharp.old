@@ -12,7 +12,13 @@ namespace MSharp
 	/// </summary>
 	public enum MethodType
 	{
+		/// <summary>
+		/// GETメソッド
+		/// </summary>
 		GET,
+		/// <summary>
+		/// POSTメソッド
+		/// </summary>
 		POST
 	}
 
@@ -21,9 +27,21 @@ namespace MSharp
 	/// </summary>
 	public class Misskey
 	{
+		/// <summary>
+		/// アプリ連携のキー
+		/// </summary>
 		public string AppKey { private set; get; }
+
+		/// <summary>
+		/// アプリの利用に必要なユーザー毎のキー
+		/// </summary>
 		public string UserKey { private set; get; }
+
+		/// <summary>
+		/// ユーザーID
+		/// </summary>
 		public string UserId { private set; get; }
+
 		private string AuthenticationSessionKey { set; get; }
 
 		/// <summary>
@@ -47,7 +65,9 @@ namespace MSharp
 		public Misskey(
 			string appKey,
 			string userKey,
-			string userId)
+			string userId,
+			string userScreenName,
+			string userName)
 		{
 			if (appKey == null)
 				throw new ArgumentNullException("appKey");
@@ -118,7 +138,9 @@ namespace MSharp
 			if(json == null)
 				throw new MSharpException("PINコードの検証に失敗しました。");
 
-			return new Misskey(this.AppKey, (string)json.userKey, (string)json.userId);
+			var user = json.user.ToString();
+			Console.WriteLine(user);
+			return new Misskey(this.AppKey, (string)user.userKey, (string)json.userId,"","");
 		}
 
 		/// <summary>
