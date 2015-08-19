@@ -62,7 +62,7 @@ namespace MSharp
 		{
 			var ret = await new MisskeyRequest(this, MethodType.GET, "sauth/get-user-key",
 				new Dictionary<string, string> {
-					{ "authentication-session-key", AuthenticationSessionKey },
+					{ "authentication-session-key", this.AuthenticationSessionKey },
 					{ "pin-code", pinCode}
 				}).Request();
 
