@@ -14,19 +14,16 @@ namespace MSharp.Core.Utility
 		/// <param name="json">JSON形式の文字列</param>
 		public static dynamic Parse(string json)
 		{
-			dynamic res;
-
 			if (json == null || string.IsNullOrEmpty(json) || string.IsNullOrWhiteSpace(json))
-				res = null;
+				return null;
+
+			dynamic res = null;
 
 			try
 			{
 				res = JsonObject.Parse(json).AsDynamic();
 			}
-			catch
-			{
-				res = null;
-			}
+			catch { }
 
 			return res;
 		}
