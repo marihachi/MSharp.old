@@ -33,20 +33,32 @@ namespace MSharpSample
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
 
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
 		{
-			var res = await mi.Request(
-				MethodType.POST,
-				"status/update",
-				new Dictionary<string, string> {
+			try
+			{
+				var res = await mi.Request(
+					(MethodType)3,
+					"status/update",
+					new Dictionary<string, string> {
 					{ "text", StatusUpdateBox.Text }
 				});
 
-			Console.WriteLine(res);
+				//var res = await mi.Request(
+				//	MethodType.POST,
+				//	"status/update",
+				//	new Dictionary<string, string> {
+				//	{ "text", StatusUpdateBox.Text }
+				//});
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 
 			StatusUpdateBox.Text = "";
 		}

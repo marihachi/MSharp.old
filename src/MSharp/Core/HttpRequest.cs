@@ -6,6 +6,9 @@ using System.Net;
 
 namespace MSharp.Core
 {
+	/// <summary>
+	/// HTTPリクエストを表します。
+	/// </summary>
 	public class HttpRequest
 	{
 		/// <summary>
@@ -43,7 +46,7 @@ namespace MSharp.Core
 			Dictionary<string, string> parameters = null)
 		{
 			if (url == null || string.IsNullOrEmpty(url) || string.IsNullOrWhiteSpace(url))
-				throw new ArgumentException("urlは空に出来ません。");
+				throw new ArgumentException("url を空にすることは出来ません。");
 
 			this.Method = method;
 			this.Url = url;
@@ -57,6 +60,7 @@ namespace MSharp.Core
 		/// リクエストを送信します。
 		/// </summary>
 		/// <exception cref="RequestException"></exception>
+		/// <exception cref="MSharpException"></exception>
 		public virtual async Task<string> Request()
 		{
 			var client = new HttpClient(new HttpClientHandler { ClientCertificateOptions = ClientCertificateOption.Automatic });
@@ -82,7 +86,7 @@ namespace MSharp.Core
 			}
 			catch (InvalidOperationException ex)
 			{
-				throw new RequestException("URLが不正です。", ex);
+				throw new RequestException("URLが無効です。", ex);
 			}
 			catch (HttpRequestException ex)
 			{
@@ -93,7 +97,7 @@ namespace MSharp.Core
 			}
 			catch (Exception ex)
 			{
-				throw new RequestException("想定外のエラーが発生しました", ex);
+				throw new MSharpException("リクエスト時に想定外のエラーが発生しました", ex);
 			}
 
 			try

@@ -8,7 +8,7 @@ using MSharp.Core.Utility;
 namespace MSharp.Core
 {
 	/// <summary>
-	/// Misskey の仕様に沿ったリクエストを表します。
+	/// Misskey の仕様に沿ったHTTPリクエストを表します。
 	/// </summary>
 	public class MisskeyRequest : HttpRequest
 	{
@@ -34,10 +34,13 @@ namespace MSharp.Core
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)
 		{
+			if (string.IsNullOrEmpty(endPoint) || string.IsNullOrWhiteSpace(endPoint))
+				throw new ArgumentException("endPoint を空にすることは出来ません。");
+
 			var match = Regex.Match(endPoint, "^/?(.+)/?$");
 
 			if (!match.Success)
-				throw new ArgumentException("エンドポイントは相対パスの形式で入力してください");
+				throw new ArgumentException("endPoint は相対パスの形式で入力してください。");
 
 			if (misskey == null || misskey.AppKey == null)
 				throw new ArgumentNullException("misskey.AppKey");

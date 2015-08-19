@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\HttpRequest.cs" />
+    <Compile Include="Core\MSharpException.cs" />
     <Compile Include="Core\Utility\Json.cs" />
     <Compile Include="Misskey.cs" />
     <Compile Include="Core\MisskeyRequest.cs" />
