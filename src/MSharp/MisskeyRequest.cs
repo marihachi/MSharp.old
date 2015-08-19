@@ -31,12 +31,14 @@ namespace MSharp
 			string endPoint,
 			Dictionary<string, string> parameters = null,
 			string baseUrl = null)
-			:base(method, null, parameters: parameters)
 		{
 			var match = Regex.Match(endPoint, "^/?(.+)/?$");
 
 			if (!match.Success)
 				throw new Exception("エンドポイントは相対パスの形で入力してください");
+
+			this.Method = method;
+			this.Parameters = parameters ?? new Dictionary<string, string>();
 
 			// url
 			this.BaseUrl = baseUrl ?? "https://api.misskey.xyz/";

@@ -52,7 +52,7 @@ namespace MSharp
 			Dictionary<string, string> headers = null,
 			Dictionary<string, string> parameters = null)
 		{
-			if (url == null || url == "")
+			if (url == null || string.IsNullOrEmpty(url) || string.IsNullOrWhiteSpace(url))
 				throw new ArgumentException("urlは空に出来ません。");
 
 			this.Method = method;
@@ -60,6 +60,8 @@ namespace MSharp
 			this.Headers = headers ?? new Dictionary<string, string>();
 			this.Parameters = parameters ?? new Dictionary<string, string>();
 		}
+
+		protected HttpRequest() { }
 
 		/// <summary>
 		/// リクエストを送信します。
