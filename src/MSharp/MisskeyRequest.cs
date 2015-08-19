@@ -35,7 +35,7 @@ namespace MSharp
 			var match = Regex.Match(endPoint, "^/?(.+)/?$");
 
 			if (!match.Success)
-				throw new Exception("エンドポイントは相対パスの形で入力してください");
+				throw new Exception("エンドポイントは相対パスの形式で入力してください");
 
 			this.Method = method;
 			this.Parameters = parameters ?? new Dictionary<string, string>();
