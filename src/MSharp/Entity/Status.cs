@@ -47,7 +47,7 @@ namespace MSharp.Entity
 			foreach (var tag in j.tags)
 				this.Tags.Add(tag.Value);
 			this.Text = j.text.Value;
-			this.User = j.user.Value != null ? new User(j.user.Value) : null;
+			this.User = j.user != null ? new User(j.user.ToString()) : null;
 			this.UserId = j.userId.Value;
 		}
 
