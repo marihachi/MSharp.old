@@ -51,29 +51,99 @@ namespace MSharp.Entity
 			this.UserId = j.userId.Value;
 		}
 
+		/// <summary>
+		/// アプリケーションID
+		/// </summary>
 		public string AppId { set; get; }
+
+		/// <summary>
+		/// 投稿日時
+		/// </summary>
 		public DateTime? CreatedAt { set; get; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public int? Cursor { private set; get; }
+
+		/// <summary>
+		/// 投稿日時(文字列)
+		/// </summary>
 		public string DisplayCreatedAt { set; get; }
+
+		/// <summary>
+		/// お気に入り数
+		/// </summary>
 		public int FavoritesCount { set; get; }
+
+		/// <summary>
+		/// ID
+		/// </summary>
 		public string Id { set; get; }
+
+		/// <summary>
+		/// 添付画像のURL
+		/// </summary>
 		public List<Uri> ImageUrls { set; get; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public string InReplyToStatusId { set; get; }
+
+		/// <summary>
+		/// 画像が添付されているかどうか
+		/// </summary>
 		public bool IsImageAttached { set; get; }
+
+		/// <summary>
+		/// リプライであるかどうか
+		/// </summary>
 		public bool IsReply { set; get; }
+
+		/// <summary>
+		/// リポストであるかどうか
+		/// </summary>
 		public bool IsRepostToStatus { set; get; }
 
 		/// <summary>
-		/// そのステータスへの返信ID
+		/// 返信元のステータスID
 		/// </summary>
 		public List<string> Replies { set; get; }
 
+		/// <summary>
+		/// 返信された数
+		/// </summary>
 		public int RepliesCount { set; get; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public string RepostFromStatusId { set; get; }
+
+		/// <summary>
+		/// リポストされた数
+		/// </summary>
 		public int RepostsCount { set; get; }
+
+		/// <summary>
+		/// タグ
+		/// </summary>
 		public List<string> Tags { set; get; }
+
+		/// <summary>
+		/// 投稿内容
+		/// </summary>
 		public string Text { private set; get; }
+
+		/// <summary>
+		/// 投稿したユーザー
+		/// </summary>
 		public User User { set; get; }
+
+		/// <summary>
+		/// 投稿したユーザーのID
+		/// </summary>
 		public string UserId { private set; get; }
 	}
 }
