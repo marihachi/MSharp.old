@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\EndPoints.cs" />
     <Compile Include="Core\HttpRequest.cs" />
     <Compile Include="Core\MSharpException.cs" />
     <Compile Include="Core\Utility\Json.cs" />
+    <Compile Include="Entity\Status.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Misskey.cs" />
     <Compile Include="Core\MisskeyRequest.cs" />
@@ -65,6 +67,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
