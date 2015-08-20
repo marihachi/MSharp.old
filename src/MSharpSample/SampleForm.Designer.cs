@@ -38,11 +38,12 @@
 			// 
 			// StatusUpdateButton
 			// 
+			this.StatusUpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.StatusUpdateButton.BackColor = System.Drawing.Color.Transparent;
 			this.StatusUpdateButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
 			this.StatusUpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.StatusUpdateButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.StatusUpdateButton.Location = new System.Drawing.Point(332, 79);
+			this.StatusUpdateButton.Location = new System.Drawing.Point(294, 79);
 			this.StatusUpdateButton.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
 			this.StatusUpdateButton.Name = "StatusUpdateButton";
 			this.StatusUpdateButton.Size = new System.Drawing.Size(76, 29);
@@ -53,6 +54,8 @@
 			// 
 			// StatusUpdateBox
 			// 
+			this.StatusUpdateBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.StatusUpdateBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
 			this.StatusUpdateBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.StatusUpdateBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -61,7 +64,7 @@
 			this.StatusUpdateBox.Multiline = true;
 			this.StatusUpdateBox.Name = "StatusUpdateBox";
 			this.StatusUpdateBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.StatusUpdateBox.Size = new System.Drawing.Size(394, 59);
+			this.StatusUpdateBox.Size = new System.Drawing.Size(356, 59);
 			this.StatusUpdateBox.TabIndex = 10;
 			// 
 			// GetTimeLineButton
@@ -81,15 +84,20 @@
 			// 
 			// listView1
 			// 
+			this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
 			this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+			this.listView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+			this.listView1.FullRowSelect = true;
 			this.listView1.Location = new System.Drawing.Point(14, 118);
 			this.listView1.Margin = new System.Windows.Forms.Padding(5);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(394, 250);
+			this.listView1.Size = new System.Drawing.Size(356, 131);
 			this.listView1.TabIndex = 13;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
@@ -102,23 +110,24 @@
 			// columnHeader2
 			// 
 			this.columnHeader2.Text = "Text";
-			this.columnHeader2.Width = 228;
+			this.columnHeader2.Width = 252;
 			// 
 			// SampleForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(422, 382);
+			this.ClientSize = new System.Drawing.Size(384, 263);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.GetTimeLineButton);
 			this.Controls.Add(this.StatusUpdateBox);
 			this.Controls.Add(this.StatusUpdateButton);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
+			this.MinimumSize = new System.Drawing.Size(400, 300);
 			this.Name = "SampleForm";
 			this.Text = "MSharpSample";
 			this.Load += new System.EventHandler(this.SampleForm_Load);

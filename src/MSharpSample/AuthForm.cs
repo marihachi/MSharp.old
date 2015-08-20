@@ -48,6 +48,7 @@ namespace MSharpSample
 			try
 			{
 				this.Result = await this._Temp.AuthorizePIN(PinBox.Text);
+
 				this.DialogResult = System.Windows.Forms.DialogResult.OK;
 				this.Close();
 			}

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 using MSharp;
 using MSharp.Core.Utility;
+using MSharp.Entity;
 
 namespace MSharpSample
 {
@@ -58,9 +59,34 @@ namespace MSharpSample
 			}
 		}
 
-		private void GetTimeLineButton_Click(object sender, EventArgs e)
+		private async void GetTimeLineButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("未実装項目です。");
+			
+
+			try
+			{
+				var res = await mi.Request(
+					MethodType.GET,
+					"status/timeline");
+
+				var json = Json.Parse(res);
+				if (json != null)
+				{
+					var statusObjList = new List<Status>();
+					foreach (var status in json)
+						statusObjList.Add(new Status(status.ToString()));
+
+					listView1.Items.Clear();
+
+					foreach (var statusObj in statusObjList)
+						listView1.Items.Add(new ListViewItem(new string[] { statusObj.User.ScreenName, statusObj.Text }));
+				}
+
+			}
+			catch (MSharp.Core.RequestException ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 	}
 }
