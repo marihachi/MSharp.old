@@ -9,42 +9,21 @@ namespace MSharpSample
 {
 	public partial class SampleForm : Form
 	{
+		private Misskey mi { set; get; }
+
 		public SampleForm()
 		{
 			InitializeComponent();
 		}
 
-		private Misskey mi { set; get; }
-
-		private string AppKey = "hmsk.eLHQBZXJmdKMqdzTbzdnIDsaifKcOIxj";
-
-		private async void StartAuthButton_Click(object sender, EventArgs e)
+		private void SampleForm_Load(object sender, EventArgs e)
 		{
-			mi = new Misskey(AppKey);
-			try
-			{
-				await mi.StartAuthorize();
-				PinOKButton.Enabled = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
+			var authForm = new AuthForm();
 
-		private async void PinOKButton_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				mi = await mi.AuthorizePIN(PinBox.Text);
-				StatusUpdateButton.Enabled = true;
-				PinOKButton.Enabled = false;
-				StartAuthButton.Enabled = false;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+			if (authForm.ShowDialog() == System.Windows.Forms.DialogResult.OK && authForm.Result.IsAuthorized)
+				mi = authForm.Result;
+			else
+				this.Close();
 		}
 
 		private async void StatusUpdateButton_Click(object sender, EventArgs e)
@@ -55,8 +34,9 @@ namespace MSharpSample
 					MethodType.POST,
 					"status/update",
 					new Dictionary<string, string> {
-					{ "text", StatusUpdateBox.Text }
-				});
+						{ "text", StatusUpdateBox.Text }
+					});
+
 				StatusUpdateBox.Text = "";
 			}
 			catch (MSharp.Core.RequestException ex)
@@ -78,10 +58,9 @@ namespace MSharpSample
 			}
 		}
 
-		private void SampleForm_Load(object sender, EventArgs e)
+		private void GetTimeLineButton_Click(object sender, EventArgs e)
 		{
-			PinOKButton.Enabled = false;
-			StatusUpdateButton.Enabled = false;
+			MessageBox.Show("未実装項目です。");
 		}
 	}
 }
