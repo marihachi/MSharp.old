@@ -101,7 +101,7 @@ namespace MSharp
 			var res = await new MisskeyRequest(this, MethodType.GET, "https://api.misskey.xyz/sauth/get-authentication-session-key").Request();
 
 			var json = Json.Parse(res);
-			if (json != null)
+			if (json != null && json.authenticationSessionKey != null)
 				this.AuthenticationSessionKey = json.authenticationSessionKey;
 			else
 				throw new MSharpException("AuthenticationSessionKey の取得に失敗しました。");
