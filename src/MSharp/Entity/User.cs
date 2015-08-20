@@ -52,72 +52,72 @@ namespace MSharp.Entity
 		}
 
 		/// <summary>
-		/// 
+		/// ヘッダー画像のURL
 		/// </summary>
 		public Uri BannerImageUrl { set; get; }
 
 		/// <summary>
-		/// 
+		/// プロフィール
 		/// </summary>
 		public string Bio { set; get; }
 
 		/// <summary>
-		/// 
+		/// カラー
 		/// </summary>
 		public System.Drawing.Color? Color { set; get; }
 
 		/// <summary>
-		/// 
+		/// コメント
 		/// </summary>
 		public string Comment { set; get; }
 
 		/// <summary>
-		/// 
+		/// アカウントの生成日時
 		/// </summary>
 		public DateTime? CreatedAt { set; get; }
 
 		/// <summary>
-		/// 
+		/// フォロワー数
 		/// </summary>
 		public int? FollowersCount { set; get; }
 
 		/// <summary>
-		/// 
+		/// フォロー数
 		/// </summary>
 		public int? FollowingsCount { set; get; }
 
 		/// <summary>
-		/// 
+		/// アイコン画像のURL
 		/// </summary>
 		public Uri IconImageUrl { set; get; }
 
 		/// <summary>
-		/// 
+		/// ID
 		/// </summary>
 		public string Id { set; get; }
 
 		/// <summary>
-		/// 
+		/// フォローしていないユーザーからのメンションを表示するかどうか
 		/// </summary>
 		public bool IsDisplayNotFollowUserMention { set; get; }
 
 		/// <summary>
-		/// 
+		/// PlusAccountであるかどうか
 		/// </summary>
 		public bool IsPlus { set; get; }
 
 		/// <summary>
-		/// 
+		/// 凍結されているかどうか
 		/// </summary>
 		public bool IsSuspended { set; get; }
 
 		/// <summary>
-		/// 
+		/// 認証済みアカウントであるかどうか
 		/// </summary>
 		public bool IsVerified { set; get; }
 
 		/// <summary>
-		/// 
+		/// 言語
 		/// </summary>
 		public string Lang { set; get; }
 
@@ -127,42 +127,42 @@ namespace MSharp.Entity
 		public List<Uri> Links { set; get; }
 
 		/// <summary>
-		/// 
+		/// 場所
 		/// </summary>
 		public string Location { set; get; }
 
 		/// <summary>
-		/// 
+		/// 名前
 		/// </summary>
 		public string Name { set; get; }
 
 		/// <summary>
-		/// 
+		/// ユーザー名
 		/// </summary>
 		public string ScreenName { set; get; }
 
 		/// <summary>
-		/// 
+		/// お気に入り数
 		/// </summary>
 		public int? StatusFavoritesCount { set; get; }
 
 		/// <summary>
-		/// 
+		/// 投稿数
 		/// </summary>
 		public int? StatusesCount { set; get; }
 
 		/// <summary>
-		/// 
+		/// タグ
 		/// </summary>
 		public List<string> Tags { set; get; }
 
 		/// <summary>
-		/// 
+		/// URL
 		/// </summary>
 		public Uri Url { set; get; }
 
 		/// <summary>
-		/// 
+		/// 背景画像のURL
 		/// </summary>
 		public Uri WallpaperImageUrl { set; get; }
 
