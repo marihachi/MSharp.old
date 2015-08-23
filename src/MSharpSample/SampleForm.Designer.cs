@@ -43,7 +43,7 @@
 			this.StatusUpdateButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
 			this.StatusUpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.StatusUpdateButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.StatusUpdateButton.Location = new System.Drawing.Point(294, 79);
+			this.StatusUpdateButton.Location = new System.Drawing.Point(579, 79);
 			this.StatusUpdateButton.Margin = new System.Windows.Forms.Padding(10, 5, 5, 5);
 			this.StatusUpdateButton.Name = "StatusUpdateButton";
 			this.StatusUpdateButton.Size = new System.Drawing.Size(76, 29);
@@ -64,7 +64,7 @@
 			this.StatusUpdateBox.Multiline = true;
 			this.StatusUpdateBox.Name = "StatusUpdateBox";
 			this.StatusUpdateBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.StatusUpdateBox.Size = new System.Drawing.Size(356, 59);
+			this.StatusUpdateBox.Size = new System.Drawing.Size(641, 59);
 			this.StatusUpdateBox.TabIndex = 10;
 			// 
 			// GetTimeLineButton
@@ -97,7 +97,7 @@
 			this.listView1.Location = new System.Drawing.Point(14, 118);
 			this.listView1.Margin = new System.Windows.Forms.Padding(5);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(356, 131);
+			this.listView1.Size = new System.Drawing.Size(641, 131);
 			this.listView1.TabIndex = 13;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
@@ -105,19 +105,19 @@
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "ScreenName";
-			this.columnHeader1.Width = 116;
+			this.columnHeader1.Width = 175;
 			// 
 			// columnHeader2
 			// 
 			this.columnHeader2.Text = "Text";
-			this.columnHeader2.Width = 252;
+			this.columnHeader2.Width = 445;
 			// 
 			// SampleForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(384, 263);
+			this.ClientSize = new System.Drawing.Size(669, 263);
 			this.Controls.Add(this.listView1);
 			this.Controls.Add(this.GetTimeLineButton);
 			this.Controls.Add(this.StatusUpdateBox);

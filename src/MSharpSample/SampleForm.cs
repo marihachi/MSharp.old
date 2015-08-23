@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using MSharp;
 using MSharp.Core.Utility;
 using MSharp.Entity;
+using System.Drawing;
 
 namespace MSharpSample
 {
@@ -79,7 +80,24 @@ namespace MSharpSample
 					listView1.Items.Clear();
 
 					foreach (var statusObj in statusObjList)
-						listView1.Items.Add(new ListViewItem(new string[] { statusObj.User.ScreenName, statusObj.Text }));
+					{
+						ListViewItem item;
+
+						if (statusObj.IsRepostToStatus)
+						{
+							item = new ListViewItem(
+								new string[] {
+									string.Format("@{0} (@{1}によってRP)", statusObj.User.ScreenName, statusObj.Source.User.ScreenName),
+									statusObj.Text });
+							item.ForeColor = Color.Lime;
+						}
+						else
+						{
+							item = new ListViewItem(new string[] { statusObj.User.ScreenName, statusObj.Text });
+						}
+
+						listView1.Items.Add(item);
+					}
 				}
 
 			}
