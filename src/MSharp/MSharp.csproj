@@ -53,9 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\EndPoints.cs" />
     <Compile Include="Core\HttpRequest.cs" />
     <Compile Include="Core\MSharpException.cs" />
+    <Compile Include="Core\ApiException.cs" />
     <Compile Include="Core\Utility\Json.cs" />
     <Compile Include="Entity\Status.cs" />
     <Compile Include="Entity\User.cs" />

@@ -13,9 +13,9 @@ namespace MSharp.Core
 	public class MisskeyRequest : HttpRequest
 	{
 		/// <summary>
-		/// リクエストの基となる Url を取得します。
+		/// このリクエストの基となる Url を取得します。
 		/// </summary>
-		public string BaseUrl { private set; get; }
+		public Uri BaseUrl { private set; get; }
 
 		/// <summary>
 		/// 新しいインスタンスを生成します
@@ -24,15 +24,13 @@ namespace MSharp.Core
 		/// <param name="method">リクエストメソッド</param>
 		/// <param name="endPoint">リクエストのエンドポイント</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
-		/// <param name="baseUrl">リクエストの基となる Url</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
 		public MisskeyRequest(
 			Misskey misskey,
 			MethodType method,
 			string endPoint,
-			Dictionary<string, string> parameters = null,
-			string baseUrl = null)
+			Dictionary<string, string> parameters = null)
 		{
 			if (method != MethodType.GET && method != MethodType.POST)
 				throw new ArgumentException("method が無効です。");
@@ -52,7 +50,7 @@ namespace MSharp.Core
 			this.Parameters = parameters ?? new Dictionary<string, string>();
 
 			// url
-			this.BaseUrl = baseUrl ?? "https://api.misskey.xyz/";
+			this.BaseUrl = misskey.BaseUrl ?? new Uri("https://api.misskey.xyz/");
 			endPoint = match.Groups[1].ToString();
 
 			this.Url = BaseUrl + endPoint;
@@ -77,9 +75,7 @@ namespace MSharp.Core
 			var json = Json.Parse(res);
 			if (json.error != null)
 			{
-				var ex = new RequestException("Misskeyからエラーが返されました。");
-				ex.Data.Add("Error", json.error.ToString());
-				throw ex;
+				throw new ApiException(json.error.message.Value);
 			}
 
 			return res;

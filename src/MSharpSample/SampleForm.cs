@@ -62,8 +62,6 @@ namespace MSharpSample
 
 		private async void GetTimeLineButton_Click(object sender, EventArgs e)
 		{
-			
-
 			try
 			{
 				var res = await mi.Request(

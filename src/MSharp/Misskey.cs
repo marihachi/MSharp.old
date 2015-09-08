@@ -43,18 +43,29 @@ namespace MSharp
 		/// </summary>
 		public User User { set; get; }
 
+		/// <summary>
+		/// APIリクエストの基となるURLを取得または設定します。
+		/// </summary>
+		public Uri BaseUrl { set; get; }
+
 		private string AuthenticationSessionKey { set; get; }
 
 		/// <summary>
 		/// 新しいMisskeyオブジェクトを生成します
 		/// </summary>
 		/// <param name="appKey">アプリ連携のキー</param>
-		public Misskey(string appKey)
+		/// <param name="baseUrl">APIリクエストの基となる Url</param>
+		public Misskey(
+			string appKey,
+			Uri baseUrl = null)
 		{
 			if (appKey == null)
 				throw new ArgumentNullException("appKey");
 
 			this.AppKey = appKey;
+
+			if (baseUrl != null)
+				this.BaseUrl = baseUrl;
 		}
 
 		/// <summary>
@@ -63,10 +74,12 @@ namespace MSharp
 		/// <param name="appKey">アプリ連携のキー</param>
 		/// <param name="userKey">アプリの利用に必要なユーザー毎のキー</param>
 		/// <param name="user">ユーザーオブジェクト</param>
+		/// <param name="baseUrl">APIリクエストの基となる Url</param>
 		public Misskey(
 			string appKey,
 			string userKey,
-			User user)
+			User user,
+			Uri baseUrl = null)
 		{
 			if (appKey == null)
 				throw new ArgumentNullException("appKey");
@@ -78,6 +91,9 @@ namespace MSharp
 			this.AppKey = appKey;
 			this.UserKey = userKey;
 			this.User = user;
+
+			if (baseUrl != null)
+				this.BaseUrl = baseUrl;
 		}
 
 		/// <summary>
@@ -98,7 +114,7 @@ namespace MSharp
 		/// <exception cref="RequestException"></exception>
 		public async Task StartAuthorize()
 		{
-			var res = await new MisskeyRequest(this, MethodType.GET, "https://api.misskey.xyz/sauth/get-authentication-session-key").Request();
+			var res = await new MisskeyRequest(this, MethodType.GET, "sauth/get-authentication-session-key").Request();
 
 			var json = Json.Parse(res);
 			if (json != null && json.authenticationSessionKey != null)
@@ -108,7 +124,8 @@ namespace MSharp
 
 			try
 			{
-				System.Diagnostics.Process.Start("https://api.misskey.xyz/authorize@" + this.AuthenticationSessionKey);
+				System.Diagnostics.Process.Start(
+					string.Format("{0}authorize@{1}", this.BaseUrl.AbsoluteUri, this.AuthenticationSessionKey));
 			}
 			catch (Exception ex)
 			{
@@ -124,7 +141,7 @@ namespace MSharp
 		/// <exception cref="RequestException"></exception>
 		public async Task<Misskey> AuthorizePIN(string pinCode)
 		{
-			if(this.AuthenticationSessionKey == null)
+			if (this.AuthenticationSessionKey == null)
 				throw new MSharpException("StartAuthorizeメソッドが呼び出されていません。");
 
 			var ret = await new MisskeyRequest(this, MethodType.GET, "sauth/get-user-key",
@@ -134,10 +151,10 @@ namespace MSharp
 				}).Request();
 
 			var json = Json.Parse(ret);
-			if(json == null)
+			if (json == null)
 				throw new MSharpException("PINコードの検証に失敗しました。");
 
-			return new Misskey(this.AppKey, json.userKey.Value, new User(json.user.ToString()));
+			return new Misskey(this.AppKey, json.userKey.Value, new User(json.user.ToString()), this.BaseUrl);
 		}
 
 		/// <summary>
@@ -146,7 +163,6 @@ namespace MSharp
 		/// <param name="method">リクエストメソッド</param>
 		/// <param name="endPoint">リクエストのエンドポイント</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
-		/// <param name="baseUrl">リクエストの基となる Url</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="MSharpException"></exception>
@@ -154,13 +170,12 @@ namespace MSharp
 		public async Task<string> Request(
 			MethodType method,
 			string endPoint,
-			Dictionary<string, string> parameters = null,
-			string baseUrl = null)
+			Dictionary<string, string> parameters = null)
 		{
 			if (!IsAuthorized)
 				throw new MSharpException("このMisskeyオブジェクトは認証されていません。");
 
-			return await new MisskeyRequest(this, method, endPoint, parameters, baseUrl).Request();
+			return await new MisskeyRequest(this, method, endPoint, parameters).Request();
 		}
 	}
 }
