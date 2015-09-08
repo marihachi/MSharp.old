@@ -134,9 +134,9 @@ namespace MSharp.Entity
 		/// </summary>
 		public int RepliesCount { set; get; }
 
-		/// <summary>
-		/// リポスト元のid
-		/// </summary>
+		///// <summary>
+		///// リポスト元のid
+		///// </summary>
 		//public string RepostFromStatusId { set; get; }
 
 		/// <summary>

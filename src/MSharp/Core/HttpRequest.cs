@@ -57,6 +57,9 @@ namespace MSharp.Core
 			this.Parameters = parameters ?? new Dictionary<string, string>();
 		}
 
+		/// <summary>
+		/// 新しいインスタンスを生成します
+		/// </summary>
 		protected HttpRequest() { }
 
 		/// <summary>
