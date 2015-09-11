@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 using MSharp.Core.Utility;
+using System.IO;
+using System.Drawing;
 
 namespace MSharp.Core
 {
@@ -24,13 +26,15 @@ namespace MSharp.Core
 		/// <param name="method">リクエストメソッド</param>
 		/// <param name="endPoint">リクエストのエンドポイント</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
+		/// <param name="images">イメージデータ</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
 		public MisskeyRequest(
 			Misskey misskey,
 			MethodType method,
 			string endPoint,
-			Dictionary<string, string> parameters = null)
+			Dictionary<string, string> parameters = null,
+			List<Image> images = null)
 		{
 			if (method != MethodType.GET && method != MethodType.POST)
 				throw new ArgumentException("method が無効です。");
@@ -48,6 +52,7 @@ namespace MSharp.Core
 
 			this.Method = method;
 			this.Parameters = parameters ?? new Dictionary<string, string>();
+			this.Images = images ?? new List<Image>();
 
 			// url
 			this.BaseUrl = misskey.BaseUrl ?? new Uri("https://api.misskey.xyz/");

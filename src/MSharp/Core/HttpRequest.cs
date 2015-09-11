@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net;
+using System.IO;
+using System.Drawing;
 
 namespace MSharp.Core
 {
@@ -32,18 +35,25 @@ namespace MSharp.Core
 		public Dictionary<string, string> Parameters { protected set; get; }
 
 		/// <summary>
+		/// マルチパートのストリーム
+		/// </summary>
+		public List<Image> Images { protected set; get; }
+
+		/// <summary>
 		/// 新しいインスタンスを生成します
 		/// </summary>
 		/// <param name="method">リクエストメソッド</param>
 		/// <param name="url">リクエストURL</param>
 		/// <param name="headers">リクエストのヘッダー</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
+		/// <param name="images">マルチパートのストリーム</param>
 		/// <exception cref="ArgumentException"></exception>
 		public HttpRequest(
 			MethodType method,
 			string url,
 			Dictionary<string, string> headers = null,
-			Dictionary<string, string> parameters = null)
+			Dictionary<string, string> parameters = null,
+			List<Image> images = null)
 		{
 			if (url == null || string.IsNullOrEmpty(url) || string.IsNullOrWhiteSpace(url))
 				throw new ArgumentException("url を空にすることは出来ません。");
@@ -55,6 +65,7 @@ namespace MSharp.Core
 			this.Url = url;
 			this.Headers = headers ?? new Dictionary<string, string>();
 			this.Parameters = parameters ?? new Dictionary<string, string>();
+			this.Images = images ?? new List<Image>();
 		}
 
 		/// <summary>
@@ -88,7 +99,40 @@ namespace MSharp.Core
 				if (this.Method == MethodType.GET)
 					res = await client.GetAsync(this.Url);
 				else
-					res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
+				{
+					if (this.Images.Count == 0)
+					{
+						res = await client.PostAsync(this.Url, new FormUrlEncodedContent(this.Parameters));
+					}
+					else
+					{
+						var content = new MultipartFormDataContent();
+
+						foreach(var param in this.Parameters)
+							content.Add(new System.Net.Http.StringContent(param.Value), param.Key);
+
+						foreach (var image in this.Images)
+						{
+							MemoryStream ms = new MemoryStream();
+							image.Save(ms,System.Drawing.Imaging.ImageFormat.Jpeg);
+							var bac = new ByteArrayContent(ms.ToArray());
+							bac.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+							{
+								FileName = "image.jpg"
+							};
+							content.Add(bac, "image");
+
+							//var sc = new StreamContent(ms);
+							//sc.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+							//{
+							//	FileName = "image.jpg"
+							//};
+							//content.Add(sc, "image");
+						}
+
+						res = await client.PostAsync(this.Url, content);
+					}
+				}
 			}
 			catch (InvalidOperationException ex)
 			{

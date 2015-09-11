@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using MSharp.Core;
 using MSharp.Entity;
 using MSharp.Core.Utility;
+using System.IO;
+using System.Drawing;
 
 namespace MSharp
 {
@@ -85,8 +87,6 @@ namespace MSharp
 				throw new ArgumentNullException("appKey");
 			if (userKey == null)
 				throw new ArgumentNullException("userKey");
-			if (user == null)
-				throw new ArgumentNullException("user");
 
 			this.AppKey = appKey;
 			this.UserKey = userKey;
@@ -163,6 +163,7 @@ namespace MSharp
 		/// <param name="method">リクエストメソッド</param>
 		/// <param name="endPoint">リクエストのエンドポイント</param>
 		/// <param name="parameters">リクエストのパラメータ</param>
+		/// <param name="images">イメージデータ</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="MSharpException"></exception>
@@ -170,12 +171,13 @@ namespace MSharp
 		public async Task<string> Request(
 			MethodType method,
 			string endPoint,
-			Dictionary<string, string> parameters = null)
+			Dictionary<string, string> parameters = null,
+			List<Image> images = null)
 		{
 			if (!IsAuthorized)
 				throw new MSharpException("このMisskeyオブジェクトは認証されていません。");
 
-			return await new MisskeyRequest(this, method, endPoint, parameters).Request();
+			return await new MisskeyRequest(this, method, endPoint, parameters, images).Request();
 		}
 	}
 }
