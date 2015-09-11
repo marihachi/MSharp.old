@@ -168,6 +168,7 @@ namespace MSharp
 		/// <exception cref="ArgumentNullException"></exception>
 		/// <exception cref="MSharpException"></exception>
 		/// <exception cref="RequestException"></exception>
+		/// <exception cref="ApiException"></exception>
 		public async Task<string> Request(
 			MethodType method,
 			string endPoint,

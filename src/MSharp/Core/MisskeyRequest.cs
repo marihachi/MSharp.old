@@ -73,6 +73,7 @@ namespace MSharp.Core
 		/// 現在のMisskeyオブジェクトを使用してリクエストを送信します。
 		/// </summary>
 		/// <exception cref="RequestException"></exception>
+		/// <exception cref="ApiException"></exception>
 		public override async Task<string> Request()
 		{
 			var res = await base.Request();
