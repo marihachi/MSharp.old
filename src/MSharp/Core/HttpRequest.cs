@@ -115,15 +115,15 @@ namespace MSharp.Core
 						{
 							MemoryStream ms = new MemoryStream();
 							image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-							var sc = new ByteArrayContent(ms.ToArray());
-							sc.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+							var bac = new ByteArrayContent(ms.ToArray());
+							bac.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
 							{
 								FileName = "image.jpg",
 								Name = "image"
 							};
-							sc.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+							bac.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 
-							content.Add(sc, "image");
+							content.Add(bac, "image");
 						}
 
 						res = await client.PostAsync(this.Url, content);
