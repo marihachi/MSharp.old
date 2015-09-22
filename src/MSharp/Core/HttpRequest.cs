@@ -108,26 +108,22 @@ namespace MSharp.Core
 					{
 						var content = new MultipartFormDataContent();
 
-						foreach(var param in this.Parameters)
-							content.Add(new System.Net.Http.StringContent(param.Value), param.Key);
+						foreach (var param in this.Parameters)
+							content.Add(new StringContent(param.Value), param.Key);
 
 						foreach (var image in this.Images)
 						{
 							MemoryStream ms = new MemoryStream();
-							image.Save(ms,System.Drawing.Imaging.ImageFormat.Jpeg);
-							var bac = new ByteArrayContent(ms.ToArray());
-							bac.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+							image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+							var sc = new ByteArrayContent(ms.ToArray());
+							sc.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
 							{
-								FileName = "image.jpg"
+								FileName = "image.jpg",
+								Name = "image"
 							};
-							content.Add(bac, "image");
+							sc.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 
-							//var sc = new StreamContent(ms);
-							//sc.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-							//{
-							//	FileName = "image.jpg"
-							//};
-							//content.Add(sc, "image");
+							content.Add(sc, "image");
 						}
 
 						res = await client.PostAsync(this.Url, content);
