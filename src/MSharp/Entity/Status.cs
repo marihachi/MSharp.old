@@ -31,7 +31,7 @@ namespace MSharp.Entity
 			try
 			{
 				this.AppId = j.appId.Value;
-				this.CreatedAt = null;	//TODO
+				this.CreatedAt = null; //TODO
 				this.Cursor = j.cursor.Value;
 				this.DisplayCreatedAt = j.displayCreatedAt.Value;
 				this.FavoritesCount = j.favoritesCount.Value;

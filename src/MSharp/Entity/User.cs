@@ -47,7 +47,7 @@ namespace MSharp.Entity
 			this.Tags = new List<string>();
 			foreach (var tag in j.tags)
 				this.Tags.Add(tag.Value);
-			this.Url = !string.IsNullOrEmpty(j.url.Value) ? new Uri(j.url.Value) : null;
+			this.Url = j.url.Value != null && j.url.Value != "" ? new Uri(j.url.Value) : null;
 			this.WallpaperImageUrl = !string.IsNullOrEmpty(j.wallpaperImageUrl.Value) ? new Uri(j.wallpaperImageUrl.Value) : null;
 		}
 
