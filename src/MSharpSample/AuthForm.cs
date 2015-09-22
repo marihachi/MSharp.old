@@ -25,13 +25,10 @@ namespace MSharpSample
 			this._Temp = new Misskey("hmsk.eLHQBZXJmdKMqdzTbzdnIDsaifKcOIxj", new Uri("http://api.misskey.xyz"));
 		}
 
-		private void AuthForm_Load(object sender, EventArgs e)
+		private async void AuthForm_Load(object sender, EventArgs e)
 		{
 			PinOKButton.Enabled = false;
-		}
 
-		private async void StartAuthButton_Click(object sender, EventArgs e)
-		{
 			try
 			{
 				await this._Temp.StartAuthorize();

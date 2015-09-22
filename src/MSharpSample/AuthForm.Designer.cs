@@ -31,13 +31,12 @@
 			this.PinLabel = new System.Windows.Forms.Label();
 			this.PinBox = new System.Windows.Forms.TextBox();
 			this.PinOKButton = new System.Windows.Forms.Button();
-			this.StartAuthButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// PinLabel
 			// 
 			this.PinLabel.AutoSize = true;
-			this.PinLabel.Location = new System.Drawing.Point(14, 66);
+			this.PinLabel.Location = new System.Drawing.Point(14, 19);
 			this.PinLabel.Margin = new System.Windows.Forms.Padding(5, 3, 3, 0);
 			this.PinLabel.Name = "PinLabel";
 			this.PinLabel.Size = new System.Drawing.Size(70, 18);
@@ -49,7 +48,7 @@
 			this.PinBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
 			this.PinBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.PinBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-			this.PinBox.Location = new System.Drawing.Point(84, 63);
+			this.PinBox.Location = new System.Drawing.Point(84, 16);
 			this.PinBox.Margin = new System.Windows.Forms.Padding(5, 3, 0, 3);
 			this.PinBox.Name = "PinBox";
 			this.PinBox.Size = new System.Drawing.Size(98, 25);
@@ -60,7 +59,7 @@
 			this.PinOKButton.BackColor = System.Drawing.Color.Transparent;
 			this.PinOKButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
 			this.PinOKButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.PinOKButton.Location = new System.Drawing.Point(187, 61);
+			this.PinOKButton.Location = new System.Drawing.Point(187, 14);
 			this.PinOKButton.Margin = new System.Windows.Forms.Padding(5);
 			this.PinOKButton.Name = "PinOKButton";
 			this.PinOKButton.Size = new System.Drawing.Size(70, 29);
@@ -69,30 +68,15 @@
 			this.PinOKButton.UseVisualStyleBackColor = false;
 			this.PinOKButton.Click += new System.EventHandler(this.PinOKButton_Click);
 			// 
-			// StartAuthButton
-			// 
-			this.StartAuthButton.BackColor = System.Drawing.Color.Transparent;
-			this.StartAuthButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-			this.StartAuthButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.StartAuthButton.Location = new System.Drawing.Point(14, 14);
-			this.StartAuthButton.Margin = new System.Windows.Forms.Padding(5);
-			this.StartAuthButton.Name = "StartAuthButton";
-			this.StartAuthButton.Size = new System.Drawing.Size(243, 28);
-			this.StartAuthButton.TabIndex = 5;
-			this.StartAuthButton.Text = "認証開始";
-			this.StartAuthButton.UseVisualStyleBackColor = false;
-			this.StartAuthButton.Click += new System.EventHandler(this.StartAuthButton_Click);
-			// 
 			// AuthForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 18F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-			this.ClientSize = new System.Drawing.Size(271, 109);
+			this.ClientSize = new System.Drawing.Size(271, 58);
 			this.Controls.Add(this.PinLabel);
 			this.Controls.Add(this.PinBox);
 			this.Controls.Add(this.PinOKButton);
-			this.Controls.Add(this.StartAuthButton);
 			this.Font = new System.Drawing.Font("メイリオ", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
 			this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -110,6 +94,5 @@
 		private System.Windows.Forms.Label PinLabel;
 		private System.Windows.Forms.TextBox PinBox;
 		private System.Windows.Forms.Button PinOKButton;
-		private System.Windows.Forms.Button StartAuthButton;
 	}
 }
