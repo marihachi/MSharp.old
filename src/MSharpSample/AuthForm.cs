@@ -22,7 +22,7 @@ namespace MSharpSample
 		{
 			InitializeComponent();
 
-			this._Temp = new Misskey("hmsk.eLHQBZXJmdKMqdzTbzdnIDsaifKcOIxj");
+			this._Temp = new Misskey("hmsk.eLHQBZXJmdKMqdzTbzdnIDsaifKcOIxj", new Uri("http://api.misskey.xyz"));
 		}
 
 		private void AuthForm_Load(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace MSharpSample
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message, "エラー");
 			}
 		}
 
@@ -54,7 +54,7 @@ namespace MSharpSample
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message, "エラー");
 			}
 		}
 	}
