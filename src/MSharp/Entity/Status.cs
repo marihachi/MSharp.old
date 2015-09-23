@@ -12,7 +12,7 @@ namespace MSharp.Entity
 	/// <summary>
 	/// ステータスオブジェクトを表します。
 	/// </summary>
-	public class Status
+	public class Status : IComparable
 	{
 		/// <summary>
 		/// 新しいインスタンスを生成します。
@@ -173,8 +173,23 @@ namespace MSharp.Entity
 		/// 投稿したユーザーのID
 		/// </summary>
 		public string UserId { private set; get; }
-	}
 
+		public int CompareTo(object obj)
+		{
+			if (obj == null)
+				return 1;
+
+			if (this.GetType() != obj.GetType())
+				throw new ArgumentException("別の型とは比較できません", "obj");
+
+			var b = ((Status)obj);
+
+			var aId = IsRepostToStatus ? Source.Id : Id;
+			var bId = b.IsRepostToStatus ? b.Source.Id : b.Id;
+
+			return aId.CompareTo(b.Id);
+		}
+	}
 	/// <summary>
 	/// リポストの内容を表します。
 	/// </summary>
@@ -198,7 +213,7 @@ namespace MSharp.Entity
 			this.UserId = j.userId.Value;
 			this.User = new User(repostUser);
 			this.AppId = j.appId.Value;
-			this.CreatedAt = null;	//TODO
+			this.CreatedAt = null;  //TODO
 			this.DisplayCreatedAt = j.displayCreatedAt.Value;
 			this.IsImageAttached = j.isImageAttached.Value;
 		}

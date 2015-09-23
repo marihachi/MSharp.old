@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 using MSharp.Core.Utility;
-using System.IO;
 using System.Drawing;
 
 namespace MSharp.Core
@@ -42,7 +41,7 @@ namespace MSharp.Core
 			if (string.IsNullOrEmpty(endPoint) || string.IsNullOrWhiteSpace(endPoint))
 				throw new ArgumentException("endPoint を空にすることは出来ません。");
 
-			var match = Regex.Match(endPoint, "^/?(.+)/?$");
+			var match = Regex.Match(endPoint, "^/?([a-z0-9./-]+)/?$", RegexOptions.IgnoreCase);
 
 			if (!match.Success)
 				throw new ArgumentException("endPoint は相対パスの形式で入力してください。");
